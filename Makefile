@@ -24,6 +24,18 @@ clean:
 	@go clean
 	@rm -rf $(BUILD_DIR)
 
+## pre-commit: Executes all quality gates
+.PHONY: pre-commit
+pre-commit:
+	$(MAKE) vet
+	$(MAKE) lint
+
+## lint: Lint the code
+.PHONY: lint
+lint:
+	golangci-lint run
+
+
 ## fmt: Format the code
 .PHONY: fmt
 fmt:

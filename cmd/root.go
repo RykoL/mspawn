@@ -29,6 +29,10 @@ func Execute() {
 
 func init() {
 	runCmd.Flags().StringArrayVar(&commands, "cmd", []string{}, "Commands to run in paralell")
-	runCmd.MarkFlagRequired("cmd")
+
+	err := runCmd.MarkFlagRequired("cmd")
+	if err != nil {
+		panic(err)
+	}
 	rootCmd.AddCommand(runCmd)
 }
