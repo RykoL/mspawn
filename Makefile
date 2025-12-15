@@ -29,6 +29,20 @@ clean:
 pre-commit:
 	$(MAKE) vet
 	$(MAKE) lint
+	$(MAKE) test/cover
+	$(MAKE) build
+
+## test: Run tests
+.PHONY: test
+test:
+	@echo "Testing..."
+	go test -v ./...
+
+## test/cover: Run tests with coverage output
+.PHONY: test/cover
+test/cover:
+	go test -v -coverprofile=coverage.out ./...
+	go tool cover -html=coverage.out
 
 ## lint: Lint the code
 .PHONY: lint
